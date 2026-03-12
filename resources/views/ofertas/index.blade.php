@@ -21,7 +21,11 @@
         @foreach ($ofertas as $oferta)
             <li>
                 <a href="{{ route('ofertas.show', $oferta) }}">{{ $oferta->titulo }}</a> - {{ $oferta->tienda }} - 
-                Vigencia: {{ $oferta->vigencia }} - Precio Original: {{ $oferta->precio_original }} - Precio con Descuento: {{ $oferta->precio_descuento }}
+                Vigencia: {{ $oferta->vigencia }} - Precio Original: {{ $oferta->precio_original }} - 
+                Precio con Descuento: {{ $oferta->precio_descuento }} - Porcentaje de Descuento: {{ number_format($oferta->getPorcentajeDescuento(), 2) }}%
+                @if ($oferta->getPorcentajeDescuento() >= 35)
+                🔥 OFERTA FUERTE
+                @endif
             </li>
         @endforeach
     </ul>

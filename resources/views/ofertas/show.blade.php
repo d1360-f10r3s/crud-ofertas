@@ -18,6 +18,11 @@
         <p>Vigencia: {{ $oferta->vigencia }}</p>
         <p>Precio Original: {{ $oferta->precio_original }}</p>
         <p>Precio con Descuento: {{ $oferta->precio_descuento }}</p>
+        <p>Porcentaje de Descuento: {{ number_format($oferta->getPorcentajeDescuento(), 2) }}%
+            @if ($oferta->getPorcentajeDescuento() >= 35)
+            🔥 OFERTA FUERTE
+            @endif
+        </p>
         <p>Creado en: {{ $oferta->created_at }}</p>
         <p>Actualizado en: {{ $oferta->updated_at }}</p>
     </div>
@@ -26,9 +31,17 @@
         <a href="{{ route('ofertas.index') }}">Volver a la lista de ofertas</a>
     </p>
 
-     <p>
+    <p>
         <a href="{{ route('ofertas.edit', $oferta->id) }}">Editar oferta</a>
     </p>
+
+    <form action="{{ route('ofertas.destroy', $oferta->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button onclick="return confirm('¿Eliminar oferta?')">
+                Eliminar
+            </button>
+    </form>
 
 </body>
 </html>
