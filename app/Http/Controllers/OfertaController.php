@@ -4,25 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Oferta;
 use Illuminate\Http\Request;
-use app\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class OfertaController extends Controller
 {
     public function index()
     {
         $ofertas=Oferta::all();
-        return view('ofertas.oferta.index')->with('ofertas', $ofertas);
+        return view('ofertas.index')->with('ofertas', $ofertas);
     }
 
     public function create()
     {
-        return view('ofertas.oferta.create');
+        return view('ofertas.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            // 'id'=>'required',
             'titulo'=>'required',
             'vigencia'=>'required',
             'tienda'=>'required',
@@ -44,18 +43,17 @@ class OfertaController extends Controller
 
     public function show(Oferta $oferta)
     {
-        return view('ofertas.oferta.show')->with('oferta', $oferta);
+        return view('ofertas.show')->with('oferta', $oferta);
     }
 
     public function edit(Oferta $oferta)
     {
-        return view('ofertas.oferta.edit')->with('oferta', $oferta);
+        return view('ofertas.edit')->with('oferta', $oferta);
     }
 
     public function update(Request $request, Oferta $oferta)
     {
         $request->validate([
-            // 'id'=>'required',
             'titulo'=>'required',
             'vigencia'=>'required',
             'tienda'=>'required',
@@ -63,7 +61,6 @@ class OfertaController extends Controller
             'precio_descuento'=>'required',
         ]);
 
-        $oferta->id=$request->id;
         $oferta->titulo=$request->titulo;
         $oferta->vigencia=$request->vigencia;
         $oferta->tienda=$request->tienda;
