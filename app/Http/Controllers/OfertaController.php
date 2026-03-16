@@ -22,11 +22,11 @@ class OfertaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo'=>'required',
-            'vigencia'=>'required',
-            'tienda'=>'required',
-            'precio_original'=>'required',
-            'precio_descuento'=>'required',
+            'titulo'=>'required|min:5',
+            'vigencia'=>'required|date|after_or_equal:today',
+            'tienda'=>'required|min:4',
+            'precio_original'=>'required|numeric|min:0.01|gt:precio_descuento',
+            'precio_descuento'=>'required|numeric|min:0',
         ]);
 
         $oferta= new Oferta();

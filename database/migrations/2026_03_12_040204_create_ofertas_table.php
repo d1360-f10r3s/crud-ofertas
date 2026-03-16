@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('titulo');
             $table->date('vigencia');
             $table->string('tienda');
-            $table->integer('precio_original');
-            $table->integer('precio_descuento');
+            $table->decimal('precio_original');
+            $table->decimal('precio_descuento');
             $table->timestamps();
         });
     }
